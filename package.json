@@ -15,8 +15,10 @@
   },
   "scripts": {
     "lint": "biome check --fix src/",
+    "personacons:encrypt": "node scripts/encrypt-personacons.mjs",
+    "personacons:decrypt": "node scripts/decrypt-personacons.mjs",
     "dev": "parcel index.html --port 1235",
-    "build": "node scripts/clean-dist.js && parcel build index.html --public-url ./ --no-cache",
+    "build": "node scripts/decrypt-personacons.mjs && node scripts/clean-dist.js && parcel build index.html --public-url ./ --no-cache",
     "preview": "parcel serve dist/index.html --port 4173"
   },
   "dependencies": {
