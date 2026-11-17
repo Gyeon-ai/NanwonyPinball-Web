@@ -1,4 +1,4 @@
-import { getNanwoniBalls } from './nanwoniBall';
+import { getNanwonyBalls } from './nanwonyBall';
 // 순위 목록에서 당첨된 이름 앞에 붙는 표시. 이모지(👑) 대신 직접 그린다.
 // 시제품에서는 주소 뒤 ?mark=이름 으로 바꿔 보며 고른다(기본은 아래 DEFAULT_MARK).
 
@@ -153,7 +153,7 @@ export function drawWinnerMark(ctx: CanvasRenderingContext2D, kind: WinnerMark, 
       break;
     case 'face': {
       // 공에 쓰는 난워니 퍼스나콘 첫 장을 작게(아직 못 불러왔으면 그리지 않는다)
-      faceImg ??= getNanwoniBalls()[0];
+      faceImg ??= getNanwonyBalls()[0];
       if (!faceImg) break;
       const d = 22 * s;
       ctx.imageSmoothingEnabled = true;

@@ -111,7 +111,7 @@ let skins: HTMLCanvasElement[] = [];
 let loading: Promise<HTMLCanvasElement[]> | undefined;
 
 /** 10장을 한 번만 불러와 다듬어 둔다. 못 불러온 그림은 빼고, 하나도 없으면 빈 목록 */
-export function loadNanwoniBalls(): Promise<HTMLCanvasElement[]> {
+export function loadNanwonyBalls(): Promise<HTMLCanvasElement[]> {
   if (typeof document === 'undefined') return Promise.resolve([]);
   loading ??= Promise.all(
     PERSONACON_URLS.map(
@@ -130,7 +130,7 @@ export function loadNanwoniBalls(): Promise<HTMLCanvasElement[]> {
   return loading;
 }
 
-export function getNanwoniBalls(): HTMLCanvasElement[] {
+export function getNanwonyBalls(): HTMLCanvasElement[] {
   return skins;
 }
 
@@ -141,7 +141,7 @@ function nameHash(name: string): number {
 }
 
 /** 같은 이름은 항상 같은 공. 아직 못 불러왔으면 undefined(도트 공으로 그린다) */
-export function getNanwoniBall(name: string): HTMLCanvasElement | undefined {
+export function getNanwonyBall(name: string): HTMLCanvasElement | undefined {
   if (skins.length === 0) return undefined;
   return skins[nameHash(name) % skins.length];
 }

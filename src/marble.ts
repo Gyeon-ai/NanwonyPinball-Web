@@ -3,7 +3,7 @@ import type { IPhysics } from './IPhysics';
 import options from './options';
 import type { ColorTheme } from './types/ColorTheme';
 import type { VectorLike } from './types/VectorLike';
-import { BALL_ART_SCALE } from './nanwoniBall';
+import { BALL_ART_SCALE } from './nanwonyBall';
 import { transformGuard } from './utils/transformGuard';
 import { rad } from './utils/utils';
 import { Vector } from './utils/Vector';
@@ -194,7 +194,7 @@ export class Marble {
       transformGuard(ctx, () => {
         const imageSmoothingEnabled = ctx.imageSmoothingEnabled;
         const imageSmoothingQuality = ctx.imageSmoothingQuality;
-        // 난워니 판: 퍼스나콘은 불러올 때 4배로 부드럽게 키워 두므로(src/nanwoniBall.ts) 부드럽게 줄여 그린다.
+        // 난워니 판: 퍼스나콘은 불러올 때 4배로 부드럽게 키워 두므로(src/nanwonyBall.ts) 부드럽게 줄여 그린다.
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.translate(x, y);

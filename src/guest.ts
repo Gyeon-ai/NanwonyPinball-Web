@@ -4,7 +4,7 @@
 // 값은 이 화면을 꾸미는 데만 쓰고 어디에도 보내지 않는다.
 import { DOT, Themes } from './data/constants';
 import { drawWinnerMark, WINNER_MARKS } from './winnerMark';
-import { PERSONACON_URLS } from './nanwoniBall';
+import { PERSONACON_URLS } from './nanwonyBall';
 
 type Palette = {
   label: string;
@@ -270,7 +270,7 @@ function syncMinimapScale() {
 
 /** 이름표 그림과 탭 아이콘: 퍼스나콘 6개월 그림(assets/personacons) */
 // 이름표 그림: 사용자가 준 난워니 고양이 그림(2026-11-17 "내가준 사진 난워니 핀볼에 넣어볼래"). 탭 아이콘은 그대로 퍼스나콘 6개월.
-const BRAND_CAT_URL = new URL('../assets/brand/nanwoni-cat.png', import.meta.url);
+const BRAND_CAT_URL = new URL('../assets/brand/nanwony-cat.png', import.meta.url);
 
 function applyBrandBall() {
   const url = PERSONACON_URLS[0].toString(); // 6개월

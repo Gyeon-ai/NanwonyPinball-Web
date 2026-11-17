@@ -140,7 +140,7 @@ canvas {
   box-shadow: 0 -4px 0 var(--dot-line), 0 4px 0 var(--dot-line), -4px 0 0 var(--dot-line), 4px 0 0 var(--dot-line);
   pointer-events: none;
 
-  // 난워니 고양이 그림(assets/brand/nanwoni-cat.png, 사용자 제공). 그림 주소는 src/guest.ts가 --brand-ball로 넣는다
+  // 난워니 고양이 그림(assets/brand/nanwony-cat.png, 사용자 제공). 그림 주소는 src/guest.ts가 --brand-ball로 넣는다
   .brand-ball {
     flex: none;
     width: 44px;

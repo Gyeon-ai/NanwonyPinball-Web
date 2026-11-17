@@ -44,7 +44,7 @@
     const names = getNames();
     window.roulette.setMarbles(names);
     ready = names.length > 0;
-    localStorage.setItem('nanwoni_pinball_names', names.join(','));
+    localStorage.setItem('nanwony_pinball_names', names.join(','));
     switch (winnerType) {
       case 'first':
         setWinnerRank(1);
@@ -212,7 +212,7 @@
     if (namesFromUrl) {
       document.querySelector('#in_names').value = namesFromUrl.replace(/,/g, '\n');
     } else {
-      const savedNames = localStorage.getItem('nanwoni_pinball_names');
+      const savedNames = localStorage.getItem('nanwony_pinball_names') ?? localStorage.getItem('nanwoni_pinball_names'); // 옛 이름(2026-11-17 전)으로 저장된 명단도 읽는다
       if (savedNames) {
         document.querySelector('#in_names').value = savedNames;
       }

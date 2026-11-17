@@ -13,12 +13,12 @@ import {
 } from './data/constants';
 import type { StageDef } from './data/maps';
 import { getDotMarble } from './dotMarble';
-import { getNanwoniBall, getNanwoniBalls, loadNanwoniBalls } from './nanwoniBall';
+import { getNanwonyBall, getNanwonyBalls, loadNanwonyBalls } from './nanwonyBall';
 
 // 시제품 확인용: 콘솔에서 21가지를 꺼내 볼 수 있게 열어 둔다
-(globalThis as any).__nanwoniBalls = getNanwoniBalls;
+(globalThis as any).__nanwonyBalls = getNanwonyBalls;
 
-// 공 그림: 난워니 구독 퍼스나콘 11장(src/nanwoniBall.ts). 이름마다 하나가 정해지고 같은 이름은 항상 같은 공.
+// 공 그림: 난워니 구독 퍼스나콘 11장(src/nanwonyBall.ts). 이름마다 하나가 정해지고 같은 이름은 항상 같은 공.
 // 그림을 불러오기 전이거나 못 불러오면 도트 공을 쓴다.
 import type { GameObject } from './gameObject';
 import type { Marble } from './marble';
@@ -125,7 +125,7 @@ export class RouletteRenderer {
   }
 
   private async _load(): Promise<void> {
-    await loadNanwoniBalls(); // 11장을 경기 전에 한 번만 불러와 다듬어 둔다(못 불러오면 도트 공)
+    await loadNanwonyBalls(); // 11장을 경기 전에 한 번만 불러와 다듬어 둔다(못 불러오면 도트 공)
     // 캔버스에 쓰는 웹폰트를 미리 요청해 둔다. 기다리지는 않는다(늦게 오면 그때부터 그 글꼴로 그려진다).
     if (typeof document !== 'undefined' && document.fonts) {
       for (const font of [
@@ -141,7 +141,7 @@ export class RouletteRenderer {
   }
 
   private marbleSkin(name: string, hue: number): CanvasImageSource | undefined {
-    return getNanwoniBall(name) ?? getDotMarble(name, hue);
+    return getNanwonyBall(name) ?? getDotMarble(name, hue);
   }
 
   protected onBeforeEntities(): void {}

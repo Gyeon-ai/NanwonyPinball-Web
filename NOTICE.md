@@ -16,9 +16,9 @@ This project is based on [Marble Roulette](https://github.com/lazygyu/roulette).
 
 ## Images
 
-Marbles use the streamer Nanwoni (SOOP whiteone325)'s subscription personacons (10 images used, 6 to 42 months) in `assets/personacons/` (`src/nanwoniBall.ts`).
-The name tag uses a Nanwoni cat illustration supplied by the user (`assets/brand/nanwoni-cat.png`, 2026-11-17).
-Use was permitted by Nanwoni's side according to the user (2026-11-16). These images are not covered by the MIT License. Rights remain with their rights holders, and they must not be redistributed outside this project.
+Marbles use the streamer Nanwony (SOOP whiteone325)'s subscription personacons (10 images used, 6 to 42 months) in `assets/personacons/` (`src/nanwonyBall.ts`).
+The name tag uses a Nanwony cat illustration supplied by the user (`assets/brand/nanwony-cat.png`, 2026-11-17).
+Use was permitted by Nanwony's side according to the user (2026-11-16). These images are not covered by the MIT License. Rights remain with their rights holders, and they must not be redistributed outside this project.
 If they cannot be loaded, pixel-art balls with a maple leaf are used instead (`src/dotMarble.ts`).
 
 ## Fonts
