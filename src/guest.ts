@@ -1,4 +1,4 @@
-// 난워니 핀볼(시제품): 주소 뒤의 값으로 이름표를 바꾼다.   ?title=이름표 글자
+// 난워니 핀볼: 이름표 글자는 '난워니 핀볼'로 고정한다(2026-11-17 사용자 요청으로 주소 ?title= 바꾸기 뺌).
 //   색 판은 까만 머리 노란 머리띠 하나뿐이다(2026-11-17 사용자 확정 "2번으로 해줘", 크림 판은 "크림 지우고"로 삭제).
 //   색 값은 docs/DESIGN.md "난워니 핀볼"과 시안 난워니핀볼-디자인의 THEMES를 따른다.
 // 값은 이 화면을 꾸미는 데만 쓰고 어디에도 보내지 않는다.
@@ -294,7 +294,7 @@ export function setupGuest() {
   applyColor(params.get('theme') ?? params.get('color') ?? DEFAULT_COLOR);
   applyBrandBall();
   const ready = () => {
-    applyTitle(params.get('title') ?? DEFAULT_TITLE);
+    applyTitle(DEFAULT_TITLE);
     setupEditor();
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
