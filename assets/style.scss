@@ -726,17 +726,17 @@ canvas {
     margin-top: 2px;
 
     button {
-      min-width: 88px;
-      height: 28px;
+      min-width: 100px; // 2026-11-17 사용자 요청으로 살짝 키움(88×28, 12px → 100×34, 14px)
+      height: 34px;
       margin-bottom: 3px;
-      padding: 0 14px;
+      padding: 0 16px;
       border: 0;
       border-radius: 0;
       background: var(--dot-blue);
       box-shadow: 0 3px 0 var(--dot-bg);
       color: var(--dot-on-blue);
       font-family: var(--dot-font);
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
 
       &:last-child {
@@ -913,6 +913,11 @@ div.toast {
 
   .result-timer-actions button {
     color: var(--dot-text);
+
+    // 일시정지 단추는 밝은 크림 바탕이라 짙은 글자(전에는 밝은 글자라 안 보였음)
+    &:first-child {
+      color: var(--dot-on-blue);
+    }
   }
 }
 
