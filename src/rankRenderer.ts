@@ -1,0 +1,149 @@
+import { NAME_FONT_FAMILY, NUMBER_FONT_FAMILY, nameColor, DOT } from './data/constants';
+import { currentWinnerMark, drawWinnerMark } from './winnerMark';
+import type { Marble } from './marble';
+import type { RenderParameters } from './rouletteRenderer';
+import type { Rect } from './types/rect.type';
+import type { MouseEventArgs, UIObject } from './UIObject';
+import { bound } from './utils/bound.decorator';
+
+const MAX_RANK_NAME_LENGTH = 10;
+
+function visibleRankName(name: string): string {
+  return Array.from(name).slice(-MAX_RANK_NAME_LENGTH).join('');
+}
+
+export class RankRenderer implements UIObject {
+  private _currentY = 0;
+  private _targetY = 0;
+  private fontHeight = 16;
+  private _userMoved = 0;
+  private _currentWinner = -1;
+  private maxY = 0;
+  private winners: Marble[] = [];
+  private marbles: Marble[] = [];
+  private winnerRank: number = -1;
+  private messageHandler?: (msg: string) => void;
+
+  @bound
+  onWheel(e: WheelEvent) {
+    this._targetY += e.deltaY;
+    if (this._targetY > this.maxY) {
+      this._targetY = this.maxY;
+    }
+    this._userMoved = 2000;
+  }
+
+  @bound
+  onDblClick(e?: MouseEventArgs) {
+    if (e) {
+      if (navigator.clipboard) {
+        const tsv: string[] = [];
+        let rank = 0;
+        tsv.push(
+          ...[...this.winners, ...this.marbles].map((m) => {
+            rank++;
+            return [rank.toString(), m.name, rank - 1 === this.winnerRank ? '☆' : ''].join('\t');
+          })
+        );
+
+        tsv.unshift(['Rank', 'Name', 'Winner'].join('\t'));
+
+        navigator.clipboard.writeText(tsv.join('\n')).then(() => {
+          if (this.messageHandler) {
+            this.messageHandler('The result has been copied');
+          }
+        });
+      }
+    }
+  }
+
+  onMessage(func: (msg: string) => void) {
+    this.messageHandler = func;
+  }
+
+  render(
+    ctx: CanvasRenderingContext2D,
+    { winners, marbles, winnerRank, theme }: RenderParameters,
+    width: number,
+    height: number
+  ) {
+    const startX = width - 5;
+    const startY = Math.max(-this.fontHeight, this._currentY - height / 2);
+    this.maxY = Math.max(0, (marbles.length + winners.length) * this.fontHeight + this.fontHeight);
+    this._currentWinner = winners.length;
+
+    this.winners = winners;
+    this.marbles = marbles;
+    this.winnerRank = winnerRank;
+
+    ctx.save();
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'top';
+    // 단즈 판: 글씨 그림자·외곽선 없이 깔끔하게(그림자 때문에 떠 보인다는 의견)
+    ctx.font = `8px ${NUMBER_FONT_FAMILY}`;
+    ctx.fillStyle = DOT.textSoft;
+    ctx.fillText(`${winners.length} / ${winners.length + marbles.length}`, width - 5, 2);
+
+    ctx.beginPath();
+    // 인원수 바로 아래에서 목록이 시작하게(사이가 떠 보인다는 의견으로 간격을 줄임)
+    const rankTop = 14;
+    const rankWidth = Math.max(150, width * .5);
+    ctx.rect(width - rankWidth, rankTop, rankWidth, height - rankTop);
+    ctx.clip();
+
+    ctx.translate(0, -startY);
+    ctx.font = `700 12px ${NAME_FONT_FAMILY}`;
+    if (theme.rankStroke) {
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = theme.rankStroke;
+    }
+    winners.forEach((marble: { hue: number; name: string }, rank: number) => {
+      const y = rank * this.fontHeight;
+      if (y >= startY && y <= startY + height) {
+        ctx.fillStyle = nameColor(marble.hue, theme.marbleLightness);
+        if (rank === winnerRank) {
+          const text = `${visibleRankName(marble.name)} #${rank + 1}`;
+          ctx.fillText(text, startX, rankTop + y);
+          const markSize = 12;
+          const markX = startX - ctx.measureText(text).width - 3 - markSize / 2;
+          drawWinnerMark(ctx, currentWinnerMark(), markX, rankTop + y + this.fontHeight / 2 - 1, markSize);
+        } else {
+          const text = `\u2714 ${visibleRankName(marble.name)} #${rank + 1}`;
+          ctx.fillText(text, startX, rankTop + y);
+        }
+      }
+    });
+    ctx.font = `400 12px ${NAME_FONT_FAMILY}`;
+    marbles.forEach((marble: { hue: number; name: string }, rank: number) => {
+      const y = (rank + winners.length) * this.fontHeight;
+      if (y >= startY && y <= startY + height) {
+        ctx.fillStyle = nameColor(marble.hue, theme.marbleLightness);
+        const text = `${visibleRankName(marble.name)} #${rank + 1 + winners.length}`;
+        ctx.fillText(text, startX, rankTop + y);
+      }
+    });
+    ctx.restore();
+  }
+
+
+  update(deltaTime: number) {
+    if (this._currentWinner === -1) {
+      return;
+    }
+    if (this._userMoved > 0) {
+      this._userMoved -= deltaTime;
+    } else {
+      this._targetY = this._currentWinner * this.fontHeight + this.fontHeight;
+    }
+    if (this._currentY !== this._targetY) {
+      this._currentY += (this._targetY - this._currentY) * (deltaTime / 250);
+    }
+    if (Math.abs(this._currentY - this._targetY) < 1) {
+      this._currentY = this._targetY;
+    }
+  }
+
+  getBoundingBox(): Rect | null {
+    return null;
+  }
+}
