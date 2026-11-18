@@ -359,11 +359,11 @@ export class RouletteRenderer {
       ctx.fill();
     }
 
-    // 난워니 판: 당첨 상자 안 이름은 색 판의 글자색(시안과 같이 그림자 없음)
+    // 난워니 판: 당첨 상자 안 이름은 색 판의 밝은 글자색(그림자 없음, 2026-11-18부터)
     const lineHeight = nameSize * 1.08;
     nameLines.forEach((line, index) => {
       const lineY = nameCenterY + (index - (nameLines.length - 1) / 2) * lineHeight;
-      ctx.fillStyle = DOT.winText;
+      ctx.fillStyle = DOT.winName;
       ctx.fillText(line, textCenterX, lineY);
     });
     ctx.restore();

@@ -48,7 +48,8 @@ export const PALETTES: Record<string, Palette> = {
     panel: '#24232a', panelIn: '#1b1a20', border: '#ffd23f', text: '#fff8e6', soft: '#c9bfa6', ink: '#000000', onInk: '#fff8e6',
     tagBg: '#ffd23f', tagText: '#18171c', start: '#ffd23f', startDeep: '#a8891c', startText: '#18171c',
     shuffle: '#fff3d9', shuffleDeep: '#a89f88', shuffleText: '#18171c', seg: '#fff3d9', segText: '#18171c',
-    winBg: '#fff3d9', winBorder: '#ffd23f', winText: '#18171c', winShadow: '#ffd23f',
+    // 2026-11-18 사용자 "난워니도 타이머 설정이랑 같은 배경으로 바꿔볼래" → "난워니 당첨 상자 올려": 당첨 상자 바탕 = 타이머 상자 바탕(panel)
+    winBg: '#24232a', winBorder: '#ffd23f', winText: '#ffd23f', winShadow: '#8a6a00',
   },
 };
 
@@ -108,6 +109,7 @@ function applyColor(key: string) {
   DOT.winBorder = palette.winBorder;
   DOT.winText = palette.winText;
   DOT.winShadow = palette.winShadow;
+  DOT.winName = palette.text; // 당첨자 이름: 타이머 설정 제목과 같은 밝은 글자색
   DOT.nameStroke = palette.light ? 'rgba(255, 255, 255, 0.95)' : 'black';
   DOT.nameStrokeWidth = palette.light ? 2.5 : 1.25;
 

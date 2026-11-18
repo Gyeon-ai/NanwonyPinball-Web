@@ -20,6 +20,7 @@ export const DOT = {
   winBorder: '#3a2e28',
   winText: '#2b221d',
   winShadow: '#f5c400',
+  winName: '#2b221d', // 당첨자 이름 글자색(2026-11-18부터 색 판의 밝은 글자색, src/guest.ts가 넣는다)
   nameStroke: 'rgba(255, 255, 255, 0.95)',
   nameStrokeWidth: 2.5,
   nameLightness: 34,
