@@ -13,19 +13,6 @@
 
 주소 값은 화면을 꾸미는 데만 쓰이며 어디에도 전송되지 않습니다.
 
-## 실행과 빌드
-
-Node.js 24와 pnpm 11.19.0을 권장합니다.
-
-```powershell
-pnpm install
-pnpm dev
-pnpm build
-```
-
-퍼스나콘 그림은 저장소에 암호화된 파일(`assets/personacons/*.png.enc`)로만 들어 있습니다. 빌드 전에 환경 변수
-`PERSONACON_KEY`로 풀며(`pnpm build`가 자동으로 실행), 키가 없거나 틀리면 빌드가 멈춥니다.
-
 ## 이미지와 라이선스
 
 소스 코드는 MIT 라이선스입니다. 퍼스나콘과 이름표 그림은 MIT 적용 대상이 아니며 재배포할 수 없습니다. 자세한 내용은 `NOTICE.md`를 보세요.
